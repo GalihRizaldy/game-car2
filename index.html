@@ -434,6 +434,30 @@
       <div id="share_file_modal_content" class="modal_inner"></div>
     </div>
   </div>
+  <button id="custom_fullscreen_btn" style="position: absolute; top: 15px; left: 70px; z-index: 9999; padding: 8px 12px; background-color: rgba(0,0,0,0.5); color: white; border: 2px solid white; border-radius: 5px; cursor: pointer; font-family: sans-serif; font-weight: bold;">⛶ Fullscreen</button>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const btn = document.getElementById('custom_fullscreen_btn');
+        btn.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log("Fullscreen Error:", err);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        });
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                btn.innerHTML = '⛶ Fullscreen';
+            } else {
+                btn.innerHTML = '✖ Exit Fullscreen';
+            }
+        });
+    });
+  </script>
   <div id="canvas_border" class="emscripten_border">
     <div id="play_content" class="middle center">
       <div class="edge">
