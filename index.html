@@ -435,17 +435,16 @@
     </div>
   </div>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <button id="custom_fullscreen_btn" style="position: absolute; top: 15px; left: 85px; z-index: 9999; padding: 10px 15px; background-color: #2b3a4a; color: white; border: 2px solid white; border-radius: 8px; cursor: pointer; font-family: 'baloo 2', ubuntu, verdana, sans-serif; font-weight: bold; font-size: 16px; box-shadow: 2px 2px 5px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 8px; transition: 0.2s;">
-    <i class="fa-solid fa-expand" id="fs_icon"></i> <span id="fs_text">Fullscreen</span>
+  <button id="custom_fullscreen_btn" style="position: absolute; top: 15px; left: 85px; z-index: 9999; padding: 5px; background-color: transparent; color: white; border: none; cursor: pointer; font-size: 26px; text-shadow: -2px -2px 0 #333, 2px -2px 0 #333, -2px 2px 0 #333, 2px 2px 0 #333; transition: 0.2s;">
+    <i class="fa-solid fa-expand" id="fs_icon"></i>
   </button>
   <style>
-    #custom_fullscreen_btn:hover { background-color: #3b5066 !important; transform: scale(1.05); }
+    #custom_fullscreen_btn:hover { transform: scale(1.1); }
   </style>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
         const btn = document.getElementById('custom_fullscreen_btn');
         const fs_icon = document.getElementById('fs_icon');
-        const fs_text = document.getElementById('fs_text');
         btn.addEventListener('click', () => {
             if (!document.fullscreenElement) {
                 document.documentElement.requestFullscreen().catch(err => {
@@ -460,10 +459,8 @@
         document.addEventListener('fullscreenchange', () => {
             if (!document.fullscreenElement) {
                 fs_icon.className = 'fa-solid fa-expand';
-                fs_text.innerText = 'Fullscreen';
             } else {
                 fs_icon.className = 'fa-solid fa-compress';
-                fs_text.innerText = 'Exit Fullscreen';
             }
         });
     });
