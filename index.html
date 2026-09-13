@@ -434,10 +434,18 @@
       <div id="share_file_modal_content" class="modal_inner"></div>
     </div>
   </div>
-  <button id="custom_fullscreen_btn" style="position: absolute; top: 15px; left: 70px; z-index: 9999; padding: 8px 12px; background-color: rgba(0,0,0,0.5); color: white; border: 2px solid white; border-radius: 5px; cursor: pointer; font-family: sans-serif; font-weight: bold;">⛶ Fullscreen</button>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <button id="custom_fullscreen_btn" style="position: absolute; top: 15px; left: 85px; z-index: 9999; padding: 10px 15px; background-color: #2b3a4a; color: white; border: 2px solid white; border-radius: 8px; cursor: pointer; font-family: 'baloo 2', ubuntu, verdana, sans-serif; font-weight: bold; font-size: 16px; box-shadow: 2px 2px 5px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 8px; transition: 0.2s;">
+    <i class="fa-solid fa-expand" id="fs_icon"></i> <span id="fs_text">Fullscreen</span>
+  </button>
+  <style>
+    #custom_fullscreen_btn:hover { background-color: #3b5066 !important; transform: scale(1.05); }
+  </style>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
         const btn = document.getElementById('custom_fullscreen_btn');
+        const fs_icon = document.getElementById('fs_icon');
+        const fs_text = document.getElementById('fs_text');
         btn.addEventListener('click', () => {
             if (!document.fullscreenElement) {
                 document.documentElement.requestFullscreen().catch(err => {
@@ -451,9 +459,11 @@
         });
         document.addEventListener('fullscreenchange', () => {
             if (!document.fullscreenElement) {
-                btn.innerHTML = '⛶ Fullscreen';
+                fs_icon.className = 'fa-solid fa-expand';
+                fs_text.innerText = 'Fullscreen';
             } else {
-                btn.innerHTML = '✖ Exit Fullscreen';
+                fs_icon.className = 'fa-solid fa-compress';
+                fs_text.innerText = 'Exit Fullscreen';
             }
         });
     });
