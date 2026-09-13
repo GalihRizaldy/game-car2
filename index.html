@@ -523,9 +523,24 @@
         progressElement.value = Math.round(loadProgressFrac * fakeProgressPercentStart);
         progressElement.max = 100;
       }
-      if (loadProgressFrac >= 1) {
-        console.log("Loading done");
-        tryStartGame();
+      if (loadProgressFrac >= 1 && !gameReadyToStart) {
+        console.log("Loading done, waiting for user click");
+        if (progressElement) progressElement.style.display = 'none';
+        
+        let playBtn = document.getElementById('start_play_btn');
+        if (!playBtn) {
+            playBtn = document.createElement('button');
+            playBtn.id = 'start_play_btn';
+            playBtn.innerText = '▶ PLAY';
+            playBtn.style = 'padding: 10px 30px; font-size: 20px; font-weight: bold; cursor: pointer; border-radius: 8px; border: 2px solid white; background-color: #00a2ff; color: white; margin-top: 10px; box-shadow: 0px 4px 6px rgba(0,0,0,0.3);';
+            playBtn.onclick = () => {
+                playBtn.style.display = 'none';
+                // Resume any existing audio contexts that might be suspended
+                if (typeof WEBAudio !== 'undefined' && WEBAudio.audioContext) WEBAudio.audioContext.resume();
+                tryStartGame();
+            };
+            document.getElementById('progress_or_play').appendChild(playBtn);
+        }
       }
     }
 
