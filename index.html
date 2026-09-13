@@ -781,7 +781,7 @@
             resizeCanvas(true);
             if (document.fullscreenElement && gameStarted && requestedCanvas) {
               let canvas = document.getElementById('canvas');
-              Module.ccall("update_screen_size", "v", ["number", "number", "number"], [canvas.width, canvas.height, 1]);
+              Module.ccall("update_screen_size", "v", ["number", "number", "number"], [canvas.width, canvas.height, window.devicePixelRatio]);
             }
           }, 500);
         };
